@@ -1,4 +1,4 @@
-package com.example.DemoSpringBoot.Exceptions;
+package com.example.DemoSpringBoot.exceptionz;
 
 // import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

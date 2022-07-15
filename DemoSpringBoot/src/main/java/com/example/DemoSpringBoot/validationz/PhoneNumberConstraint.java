@@ -1,4 +1,4 @@
-package com.example.DemoSpringBoot.Validations;
+package com.example.DemoSpringBoot.validationz;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

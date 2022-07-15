@@ -1,3 +1,4 @@
+package com.example.DemoSpringBoot.exceptionz;
 // package com.example.DemoSpringBoot.Exceptions;
 
 // import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
-package com.example.DemoSpringBoot.Beans.dtos;
+package com.example.DemoSpringBoot.models.DTO;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class RegisterUserDTO {
+public class UserDTO {
     private BigInteger id;
     private String firstName;
     private String lastName;
@@ -13,10 +13,10 @@ public class RegisterUserDTO {
     private Date createdDate;
     
     
-    public RegisterUserDTO() {
+    public UserDTO() {
     }
 
-    public RegisterUserDTO(String firstName, String lastName, String email, String phone, Timestamp createdDate) {
+    public UserDTO(String firstName, String lastName, String email, String phone, Timestamp createdDate) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;

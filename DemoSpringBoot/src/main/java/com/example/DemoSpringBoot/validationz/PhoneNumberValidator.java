@@ -1,4 +1,4 @@
-package com.example.DemoSpringBoot.Validations;
+package com.example.DemoSpringBoot.validationz;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

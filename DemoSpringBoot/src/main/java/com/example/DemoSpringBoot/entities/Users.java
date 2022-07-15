@@ -1,4 +1,4 @@
-package com.example.DemoSpringBoot.Beans;
+package com.example.DemoSpringBoot.entities;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.example.DemoSpringBoot.Validations.PhoneNumberConstraint;
+import com.example.DemoSpringBoot.validationz.PhoneNumberConstraint;
 
 @Entity
 public class Users {
