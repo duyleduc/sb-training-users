@@ -4,6 +4,7 @@ import com.training.user.dtos.UserDto;
 import com.training.user.entities.User;
 import com.training.user.serviceInterfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/protected")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
@@ -41,6 +43,7 @@ public class UserController {
 
     @PostMapping("users/save")
     public UserDto saveUser(@RequestBody @Valid UserDto userDto){
+
         User user = modelMapper.map(userDto,User.class);
 
         User userEntity = userService.saveUser(user);

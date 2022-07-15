@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +31,5 @@ public class UserDto {
     @Size(min = 10, max = 10, message = "phone should have only 10 numbers")
     @Pattern(regexp="(^$|[0-9]{10})", message = "phone should have number character only")
     private String phone;
+
 }
