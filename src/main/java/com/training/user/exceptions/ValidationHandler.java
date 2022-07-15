@@ -1,4 +1,4 @@
-package com.training.user.Exception;
+package com.training.user.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

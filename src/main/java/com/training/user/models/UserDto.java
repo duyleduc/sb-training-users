@@ -1,4 +1,4 @@
-package com.training.user.dtos;
+package com.training.user.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
