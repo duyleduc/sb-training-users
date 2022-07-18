@@ -11,19 +11,26 @@ public class UserDTO {
     private String email;
     private String phone;
     private Date createdDate;
-    
-    
+
     public UserDTO() {
     }
 
-    public UserDTO(String firstName, String lastName, String email, String phone, Timestamp createdDate) {
+    public UserDTO(String firstName, String lastName, String email, String phone, Date createdDate) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.createdDate = new Date(createdDate.getTime());
-        System.out.println(this.createdDate + "DTO constructor");
+        this.createdDate = createdDate;
+    }
+
+    public UserDTO(String firstName, String lastName, String email, String phone) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.createdDate = new Date();
     }
 
     public BigInteger getId() {
@@ -71,8 +78,7 @@ public class UserDTO {
     }
 
     public void setCreatedDate(Date createdDate) {
-        this.createdDate = new Date(createdDate.getTime());
+        this.createdDate = (createdDate != null) ? new Date(createdDate.getTime()) : new Date();
     }
 
-    
 }

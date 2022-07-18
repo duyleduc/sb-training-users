@@ -14,8 +14,8 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumberCons
     public boolean isValid(String phoneNumberField, ConstraintValidatorContext context) {
         if (phoneNumberField != null
                 && phoneNumberField.matches("[0-9]+")
-                && phoneNumberField.length() > 8
-                && phoneNumberField.length() < 10) {
+                && phoneNumberField.length() >= 8
+                && phoneNumberField.length() <= 10) {
             return true;
         }
         return false;

@@ -2,6 +2,7 @@ package com.example.DemoSpringBoot.mappers;
 
 import java.util.List;
 
+import org.mapstruct.InheritInverseConfiguration;
 // import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -16,6 +17,9 @@ public interface UserMapper {
     UserDTO user2DTO(Users user);
 
     List<UserDTO> users2DTOs(List<Users> users);
+
+    @InheritInverseConfiguration
+    Users DTO2User(UserDTO userDTO);
 
     
 }
