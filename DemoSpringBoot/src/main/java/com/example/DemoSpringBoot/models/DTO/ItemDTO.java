@@ -6,7 +6,6 @@ public class ItemDTO {
     private String itemID;
     private String itemName;
     private String description;
-    private CatalogDTO catalogID;
     private Date createdDate;
     
     public ItemDTO() {
@@ -28,12 +27,6 @@ public class ItemDTO {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public CatalogDTO getCatalogID() {
-        return catalogID;
-    }
-    public void setCatalogID(CatalogDTO catalogID) {
-        this.catalogID = catalogID ;
     }
     public Date getCreatedDate() {
         return createdDate;

@@ -1,6 +1,5 @@
 package com.example.DemoSpringBoot.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,22 +19,16 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Catalogs {
 
     @Id
-    @Column
-    // @NotNull
-    // @Size(max = 8, message = "The length of catalogID must be between 1 and 8 characters.")
+    @Column(name = "catalogid")
     private String catalogID;
 
-    @OneToMany(mappedBy = "catalogID", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "catal0g", cascade = {CascadeType.ALL})
     private List<Items> itemsList;
 
     @Column
-    // @NotEmpty(message = "catalogName is required")
-    // @Size(max = 64, message = "The length of catalog Name must be between 1 and 64 characters.")
     private String catalogName;
 
     @Column
-    // @NotEmpty(message = "description is required")
-    // @Size(max = 64, message = "The length of description must be between 1 and 64 characters.")
     private String description;
 
     @Column
@@ -97,14 +90,5 @@ public class Catalogs {
 
     public void setItems(List<Items> items) {
         this.itemsList = items;
-    }
-
-    // bidirectional Relationship
-    public void addItem(Items item) {
-        if(this.itemsList == null){
-            this.itemsList = new ArrayList<>();
-        }
-        itemsList.add(item);
-        // item.setCatalogID(this);
     }
 }

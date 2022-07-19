@@ -1,13 +1,11 @@
 package com.example.DemoSpringBoot.models.DTO;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class CatalogDTO {
     private String catalogID, catalogName, description;
     private Date createdDate;
-    private List<ItemDTO> itemsList;
+   
     
     public String getCatalogID() {
         return catalogID;
@@ -37,19 +35,4 @@ public class CatalogDTO {
     public CatalogDTO(){
         
     }
-    public List<ItemDTO> getItems() {
-        return itemsList;
-    }
-    public void setItems(List<ItemDTO> itemsList) {
-        this.itemsList = itemsList;
-    }
-
-    // bidirectional Relationship
-    // public void addItem(ItemDTO itemDTO) {
-    //     if(this.itemsList == null){
-    //         this.itemsList = new ArrayList<>();
-    //     }
-    //     itemsList.add(itemDTO);
-    //     // itemDTO.setCatalogID(this);
-    // }
 }

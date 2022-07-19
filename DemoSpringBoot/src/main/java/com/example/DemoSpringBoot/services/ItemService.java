@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.DemoSpringBoot.entities.Catalogs;
 import com.example.DemoSpringBoot.entities.Items;
-import com.example.DemoSpringBoot.mappers.CatalogMapper;
 import com.example.DemoSpringBoot.mappers.ItemMapper;
-import com.example.DemoSpringBoot.models.DTO.CatalogDTO;
 import com.example.DemoSpringBoot.models.DTO.ItemDTO;
 import com.example.DemoSpringBoot.repositories.CatalogRepository;
 import com.example.DemoSpringBoot.repositories.ItemRepository;
@@ -25,9 +23,6 @@ public class ItemService implements ItemServiceImpl {
 
     @Autowired
     private ItemMapper mapper;
-
-    @Autowired
-    private CatalogMapper cMapper;
 
     @Override
     public ItemDTO getItem(String id) throws Exception {
@@ -53,12 +48,14 @@ public class ItemService implements ItemServiceImpl {
     @Override
     public ItemDTO createItem(String CatalogID, ItemDTO itemDTO) throws Exception {
         try {
-            // Catalogs catalog = cRepository.findById(CatalogID).get();
-            // CatalogDTO catalogDTO = cMapper.catalog2DTO(catalog);
-            // catalogDTO.addItem(itemDTO);
-            Items sampleItem = mapper.DTO2Item(itemDTO);
-            // sampleItem.setCatalogID(catalog);
-            // catalog.addItem(sampleItem);
+            Catalogs catalog = cRepository.findById(CatalogID).get();
+            Items sampleItem = new Items(
+                itemDTO.getItemID(),
+                itemDTO.getItemName(),
+                itemDTO.getDescription(),
+                catalog,
+                itemDTO.getCreatedDate()
+            );
            iRepository.save(sampleItem);
 
             return mapper.item2DTO(sampleItem);
