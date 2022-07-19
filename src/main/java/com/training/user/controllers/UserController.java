@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/protected/users")
+@RequestMapping("/api/v1/public/users")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("")
+    @GetMapping
     public List<UserDto> getUsers(){
 
         List<User> users = userService.getUsers();
@@ -28,9 +28,9 @@ public class UserController {
         return  users.stream().map(user -> modelMapper.map(user,UserDto.class)).collect(Collectors.toList());
     }
 
-    @GetMapping("{userId}")
-    public UserDto getUserById(@PathVariable int userId){
-        User user = userService.getUserById(userId);
+    @GetMapping("{accountNumber}")
+    public UserDto getUserById(@PathVariable String accountNumber){
+        User user = userService.getUserByAccountNumber(accountNumber) ;
 
         UserDto userDto = modelMapper.map(user,UserDto.class);
         return userDto;
@@ -41,7 +41,7 @@ public class UserController {
 //        return userService.getUserByEmail(email);
 //    }
 
-    @PostMapping("")
+    @PostMapping
     public UserDto saveUser(@RequestBody @Valid UserDto userDto){
 
         User user = modelMapper.map(userDto,User.class);
@@ -52,18 +52,18 @@ public class UserController {
         return result;
     }
 
-    @PutMapping("{userId}")
-    public User updateUser(@RequestBody @Valid UserDto userDto,@PathVariable int userId) {
+    @PatchMapping("{accountNumber}")
+    public User updateUser(@RequestBody @Valid UserDto userDto,@PathVariable String  accountNumber) {
         User user = modelMapper.map(userDto,User.class);
-        user.setId(userId);
+        user.setAccountNumber(accountNumber);
 
         return userService.updateUser(user);
     }
 
 
-    @DeleteMapping("{userId}")
-    public int removeUser(@PathVariable int userId){
-        return userService.removeUser(userId);
+    @DeleteMapping("{accountNumber}")
+    public String removeUser(@PathVariable String accountNumber){
+        return userService.removeUser(accountNumber);
     }
 
 }

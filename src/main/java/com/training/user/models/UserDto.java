@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class UserDto {
-    private int id;
+//    private int id;
+
+    private String accountNumber;
 
     @NotEmpty
     @Size(min = 2, max = 8,message = "first name should have more than 2 characters and less than 8 character")
@@ -29,7 +31,8 @@ public class UserDto {
 
     @NotNull
     @Size(min = 10, max = 10, message = "phone should have only 10 numbers")
-    @Pattern(regexp="(^$|[0-9]{10})", message = "phone should have number character only")
+    @Pattern(regexp="(^$|[0-9]{10})", message = "phone should have number character only and only 10 numbers")
     private String phone;
 
+    private LocalDateTime createdAt ;
 }
