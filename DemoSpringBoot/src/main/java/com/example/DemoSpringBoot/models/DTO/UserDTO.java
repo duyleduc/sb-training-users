@@ -1,7 +1,6 @@
 package com.example.DemoSpringBoot.models.DTO;
 
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserDTO {
@@ -12,27 +11,9 @@ public class UserDTO {
     private String phone;
     private Date createdDate;
 
-    public UserDTO() {
+    public UserDTO(){
+        
     }
-
-    public UserDTO(String firstName, String lastName, String email, String phone, Date createdDate) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.createdDate = createdDate;
-    }
-
-    public UserDTO(String firstName, String lastName, String email, String phone) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.createdDate = new Date();
-    }
-
     public BigInteger getId() {
         return id;
     }

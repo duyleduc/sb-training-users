@@ -3,7 +3,6 @@ package com.example.DemoSpringBoot.mappers;
 import java.util.List;
 
 import org.mapstruct.InheritInverseConfiguration;
-// import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -14,7 +14,7 @@ import com.example.DemoSpringBoot.models.DTO.UserDTO;
 import com.example.DemoSpringBoot.repositories.UserRepository;
 
 @Service
-class UserService implements UserServiceImpl {
+public class UserService implements UserServiceImpl {
 
     @Autowired
     private UserMapper mapper;

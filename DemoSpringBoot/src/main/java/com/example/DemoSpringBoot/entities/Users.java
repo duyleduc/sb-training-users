@@ -1,7 +1,6 @@
 package com.example.DemoSpringBoot.entities;
 
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -57,6 +56,10 @@ public class Users {
      * @return
      */
 
+    public Users() {
+
+    }
+
     public Users(String firstName, String lastName, String email, String phone, Date createdDate) {
         super();
         this.firstName = firstName;
@@ -64,17 +67,6 @@ public class Users {
         this.email = email;
         this.phone = phone;
         this.createdDate = createdDate;
-    }
-    public Users(String firstName, String lastName, String email, String phone) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.createdDate = new Date();
-    }
-
-    public Users() {
     }
 
     /**

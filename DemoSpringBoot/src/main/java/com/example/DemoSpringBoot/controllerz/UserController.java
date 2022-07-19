@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 // import com.example.DemoSpringBoot.entities.Users;
@@ -23,7 +22,7 @@ import com.example.DemoSpringBoot.services.UserServiceImpl;
 @RequestMapping(value = "api/v1/protected/users")
 public class UserController {
     @Autowired
-    UserServiceImpl uService;
+    private UserServiceImpl uService;
 
     @GetMapping(value = "")
     public List<UserDTO> getAllUsers() throws Exception {
