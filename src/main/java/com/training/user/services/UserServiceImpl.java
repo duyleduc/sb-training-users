@@ -1,23 +1,31 @@
 package com.training.user.services;
 
-import com.training.user.entities.User;
-import com.training.user.exceptions.AppException;
+import com.training.user.entities.user.User;
 import com.training.user.repositories.UserRepository;
-import com.training.user.services.UserService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private  UserRepository userRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
 
     @Override
@@ -76,6 +84,49 @@ public class UserServiceImpl implements UserService {
 
          userRepository.delete(user);
          return accountNumber;
+    }
+
+    @Override
+    public void generatedOTP(User user) throws UnsupportedEncodingException, MessagingException  {
+        String OTP = RandomString.make(8);
+
+        user.setOtp(OTP);
+        user.setOtpRequestedTime(new Date());
+
+        userRepository.save(user);
+
+        sendOTPEmail(user, OTP);
+    }
+
+    @Override
+    public void sendOTPEmail(User user, String OTP) throws UnsupportedEncodingException, MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("levantuthptngtu@gmail.com", "Shopme Support");
+        helper.setTo(user.getEmail());
+
+        String subject = "Here's your One Time Password (OTP) - Expire in 5 minutes!";
+
+        String content = "<p>Hello " + user.getFirstName() + "</p>"
+                + "<p>For security reason, you're required to use the following "
+                + "One Time Password to login:</p>"
+                + "<p><b>" + OTP + "</b></p>"
+                + "<br>"
+                + "<p>Note: this OTP is set to expire in 5 minutes.</p>";
+
+        helper.setSubject(subject);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
+    @Override
+    public void clearOTP(User user) {
+        user.setOtp(null);
+        user.setOtpRequestedTime(null);
+        userRepository.save(user);
     }
 
 

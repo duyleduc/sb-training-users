@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,4 +36,8 @@ public class UserDto {
     private String phone;
 
     private LocalDateTime createdAt ;
+
+    private String otp;
+    private Date otpRequestedTime;
+    private Boolean mailVerificationStatus = false;
 }
