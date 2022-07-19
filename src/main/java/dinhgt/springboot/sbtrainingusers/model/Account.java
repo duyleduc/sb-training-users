@@ -25,6 +25,9 @@ public class Account implements Serializable {
 	@Column(name = "id", length = 36, nullable = false, updatable = false)
 	private int id;
 
+	@Column(name = "password")
+	private String password;
+	
 	@Column(name = "first_name", length = 65)
 	@NonNull
 	private String firtName;
@@ -44,18 +47,26 @@ public class Account implements Serializable {
 	@Column(name = "created_date")
 	private LocalDateTime createdDate;
 
+	@Column(name = "update_date")
+	private LocalDateTime updateDate;
+
+	@Column(name = "device_token")
+	private String deviceToken;
+	
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Account(int id, String firtName, String lastName, String email, String phone, LocalDateTime createdDate) {
+	
+	public Account( String firtName, String lastName, String email, String phone,
+			LocalDateTime createdDate, LocalDateTime updateDate) {
 		super();
-		this.id = id;
+
 		this.firtName = firtName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
 		this.createdDate = createdDate;
+		this.updateDate = updateDate;
 	}
 
 	public int getId() {
@@ -106,4 +117,13 @@ public class Account implements Serializable {
 		this.createdDate = createdDate;
 	}
 
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	
 }

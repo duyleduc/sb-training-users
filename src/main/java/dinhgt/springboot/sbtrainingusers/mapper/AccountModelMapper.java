@@ -6,9 +6,7 @@ import dinhgt.springboot.sbtrainingusers.dtos.AccountDTO;
 import dinhgt.springboot.sbtrainingusers.model.Account;
 
 @Mapper(componentModel = "spring")
-public interface AccountModelMapper {
-
-	
+public interface AccountModelMapper {	
 
 	AccountDTO accountDTO(Account account);
 

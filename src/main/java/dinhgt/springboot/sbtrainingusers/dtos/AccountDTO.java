@@ -19,11 +19,15 @@ public class AccountDTO {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdDate;
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime updateDate;
+	
 	public AccountDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountDTO(int id, String firtName, String lastName, String email, String phone, LocalDateTime createdDate) {
+	public AccountDTO(int id, String firtName, String lastName, String email, String phone, LocalDateTime createdDate,
+			LocalDateTime updateDate) {
 		super();
 		this.id = id;
 		this.firtName = firtName;
@@ -31,6 +35,7 @@ public class AccountDTO {
 		this.email = email;
 		this.phone = phone;
 		this.createdDate = createdDate;
+		this.updateDate = updateDate;
 	}
 
 	public int getId() {
@@ -81,6 +86,15 @@ public class AccountDTO {
 		this.createdDate = createdDate;
 	}
 
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	
 	
 	
 }

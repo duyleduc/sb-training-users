@@ -4,8 +4,11 @@ import dinhgt.springboot.sbtrainingusers.dtos.AccountDTO;
 
 public interface IAccountService {
 
-	public AccountDTO create(AccountDTO account);
+	 AccountDTO create(AccountDTO account);
 	
-	public void getAllAccount();
+	 void getAllAccount();
+	 
+	 AccountDTO update(AccountDTO account, int id);
+	 
 	
 }

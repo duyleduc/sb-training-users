@@ -23,4 +23,15 @@ public class AccountExceptionHandler {
 	}
 	
 	
+	@ExceptionHandler
+	public ResponseEntity<ErrorResponse> handleUpdateException(AccountUpdateException error){
+		ErrorResponse errorResponse = new ErrorResponse();
+	
+		errorResponse.setHttp_code(HttpStatus.BAD_REQUEST.value());
+		errorResponse.setMessage(error.getMessage());
+		errorResponse.setTimestamp(System.currentTimeMillis());
+		
+		return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.OK);
+	}
+	
 }
