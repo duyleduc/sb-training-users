@@ -10,6 +10,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -67,7 +69,16 @@ public class User {
         createdAt = LocalDateTime.now();
         log.info("get current time {}", createdAt);
     }
-//    public boolean isOTPRequired() {
+
+    public void setRoles(List<Role> roles) {
+        if (roles == null) {
+            this.roles = null;
+        } else {
+            this.roles = Collections.unmodifiableList(roles);
+        }
+    }
+
+    //    public boolean isOTPRequired() {
 //        if (this.getOtp() == null) {
 //            return false;
 //        }

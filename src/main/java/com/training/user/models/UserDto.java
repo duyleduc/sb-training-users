@@ -30,6 +30,8 @@ public class UserDto {
 //    @Pattern(regexp="^(.+)@(\\\\S+)$", message = "Email is not valid")
     private String email;
 
+    private String password;
+
     @NotNull
     @Size(min = 10, max = 10, message = "phone should have only 10 numbers")
     @Pattern(regexp="(^$|[0-9]{10})", message = "phone should have number character only and only 10 numbers")
