@@ -1,6 +1,8 @@
 package com.training.user.services;
 
 import com.training.user.entities.user.User;
+import com.training.user.exceptions.ResourceIsAlreadyTakenException;
+import com.training.user.exceptions.ResourceNotFoundException;
 import com.training.user.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
@@ -31,6 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
         log.info("saving new user {} {} {} {} to database",user.getFirstName(),user.getLastName(),user.getAccountNumber(),user.getCreatedAt());
+        User userDB = userRepository.findByEmail(user.getEmail());
+        if(userDB != null){
+            throw new ResourceIsAlreadyTakenException("User", "email", user.getEmail());
+        }
 
         return userRepository.save(user);
     }
@@ -40,10 +46,8 @@ public class UserServiceImpl implements UserService {
         log.info("Fetching user with Account Number {} ",accountNumber);
 
         User user = userRepository.findByAccountNumber(accountNumber);
-        if(user == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
-            );
+        if(user == null){
+            throw new ResourceNotFoundException("User", "Account Number", accountNumber);
         }
 
         return user;
@@ -61,9 +65,7 @@ public class UserServiceImpl implements UserService {
         log.info("update user {} {} to database",user.getFirstName(),user.getLastName());
         User UserDB = userRepository.findByAccountNumber(user.getAccountNumber());
         if(UserDB == null){
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
-            );
+            throw new ResourceNotFoundException("User", "Account Number", user.getAccountNumber());
         }
         user.setCreatedAt(UserDB.getCreatedAt());
         user.setAccountNumber(UserDB.getAccountNumber());
@@ -77,9 +79,7 @@ public class UserServiceImpl implements UserService {
 
          User user = userRepository.findByAccountNumber(accountNumber);
          if(user == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
-             );
+             throw new ResourceNotFoundException("User", "Account Number", accountNumber);
         }
 
          userRepository.delete(user);
@@ -88,6 +88,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void generatedOTP(User user) throws UnsupportedEncodingException, MessagingException  {
+        User userDB = userRepository.findByAccountNumber(user.getAccountNumber());
+        if(userDB == null) {
+            throw new ResourceNotFoundException("User", "Account Number", user.getAccountNumber());
+        }
         String OTP = RandomString.make(8);
 
         user.setOtp(OTP);
@@ -100,6 +104,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void sendOTPEmail(User user, String OTP) throws UnsupportedEncodingException, MessagingException{
+        User userDB = userRepository.findByAccountNumber(user.getAccountNumber());
+        if(userDB == null) {
+            throw new ResourceNotFoundException("User", "Account Number", user.getAccountNumber());
+        }
+
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -124,6 +133,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void clearOTP(User user) {
+        User userDB = userRepository.findByAccountNumber(user.getAccountNumber());
+        if(userDB == null) {
+            throw new ResourceNotFoundException("User", "Account Number", user.getAccountNumber());
+        }
+
         user.setOtp(null);
         user.setOtpRequestedTime(null);
         userRepository.save(user);

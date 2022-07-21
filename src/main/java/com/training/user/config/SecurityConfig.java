@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(unauthorizedHandler).
                 and()
                 .authorizeRequests()
-//                .antMatchers("/api/v1/public/**").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này
+                .antMatchers("/api/v1/public/**").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này
                  .antMatchers(HttpMethod.POST,"/api/v1/public/auth/**").permitAll()
                 .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 
