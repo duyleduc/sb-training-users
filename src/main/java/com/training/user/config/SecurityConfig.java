@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsServiceImpl customUserDetailsService;
 
-//    @Autowired
-//    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    @Autowired
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
 
 
     @Bean
@@ -56,7 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors() // Ngăn chặn request từ một domain khác
-                .and().csrf().disable()
+                .and().csrf().disable().exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler).
+                and()
                 .authorizeRequests()
 //                .antMatchers("/api/v1/public/**").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này
                  .antMatchers(HttpMethod.POST,"/api/v1/public/auth/**").permitAll()
