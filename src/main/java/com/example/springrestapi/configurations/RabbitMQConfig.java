@@ -11,11 +11,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String QUEUE_NAME = "VERIFY_QUEUE";
+    public static final String QUEUE_NAME = "MY_QUEUE";
 
     public static final String TOPIC_EXCHANGE = "TOPIC_EXCHANGE";
 
-    public static final String ROUTING_KEY = "*.verify.*";
+    public static final String USER_ROUTING_KEY = "*.user.*";
+
+    public static final String ORDER_ROUTING_KEY = "*.order.*";
+
+    public static final String CATALOG_ROUTING_KEY = "*.catalog.*";
 
     @Bean
     public Queue getQueue() {
@@ -28,8 +32,18 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    Binding bindingTopicExchangeToQueue2(TopicExchange exchange) {
-        return BindingBuilder.bind(getQueue()).to(exchange).with(ROUTING_KEY);
+    Binding bindingTopicExchangeToQueueWithUser(TopicExchange exchange) {
+        return BindingBuilder.bind(getQueue()).to(exchange).with(USER_ROUTING_KEY);
+    }
+
+    @Bean
+    Binding bindingTopicExchangeToQueueWithOrder(TopicExchange exchange) {
+        return BindingBuilder.bind(getQueue()).to(exchange).with(ORDER_ROUTING_KEY);
+    }
+
+    @Bean
+    Binding bindingTopicExchangeToQueueWithCatalog(TopicExchange exchange) {
+        return BindingBuilder.bind(getQueue()).to(exchange).with(CATALOG_ROUTING_KEY);
     }
 
     @Bean

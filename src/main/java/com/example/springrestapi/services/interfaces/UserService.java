@@ -15,4 +15,6 @@ public interface UserService {
 
     User getUserByAccountId(UUID accountId) throws Exception;
 
+    void checkOrderAccountId(UUID accountId, UUID messageId) throws Exception;
+
 }

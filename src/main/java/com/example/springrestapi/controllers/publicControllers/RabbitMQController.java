@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springrestapi.configurations.RequestConfig;
-import com.example.springrestapi.publisher.VerifyPublisher;
+import com.example.springrestapi.publishers.Publisher;
 
 @RestController
 @RequestMapping(value = RequestConfig.BASE_PUBLIC_URL + "/rabbitMQ")
 public class RabbitMQController {
 
     @Autowired
-    VerifyPublisher verifyPublisher;
+    Publisher publisher;
 
     @PostMapping
     public void testSendMessage() {
-        verifyPublisher.sendMessage("Test message", "email.verify.otp");
+
     }
 }
