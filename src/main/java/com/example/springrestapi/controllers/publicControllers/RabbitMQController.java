@@ -13,7 +13,7 @@ import com.example.springrestapi.publishers.Publisher;
 public class RabbitMQController {
 
     @Autowired
-    Publisher publisher;
+    private Publisher publisher;
 
     @PostMapping
     public void testSendMessage() {

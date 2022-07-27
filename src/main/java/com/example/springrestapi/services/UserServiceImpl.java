@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    Publisher publisher;
+    private Publisher publisher;
 
     @Override
     @Transactional

@@ -15,10 +15,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserDelegateService implements DelegateService {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @Override
     public void receiveAction(String actionType, String domain, QueueMessage message) throws Exception {
