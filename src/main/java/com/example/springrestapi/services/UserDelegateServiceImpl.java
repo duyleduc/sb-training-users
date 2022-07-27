@@ -1,18 +1,16 @@
-package com.example.springrestapi.delegateService;
-
-import java.security.DrbgParameters.Reseed;
+package com.example.springrestapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.springrestapi.delegateService.interfaces.DelegateService;
 import com.example.springrestapi.messages.QueueMessage;
 import com.example.springrestapi.messages.data.UserIdMessage;
+import com.example.springrestapi.services.interfaces.DelegateService;
 import com.example.springrestapi.services.interfaces.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service("userDelegateService")
-public class UserDelegateService implements DelegateService {
+public class UserDelegateServiceImpl implements DelegateService {
 
     @Autowired
     private UserService userService;

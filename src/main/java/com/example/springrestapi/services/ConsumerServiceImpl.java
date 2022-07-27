@@ -1,22 +1,24 @@
-package com.example.springrestapi.consumers;
+package com.example.springrestapi.services;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.example.springrestapi.configurations.RabbitMQConfig;
-import com.example.springrestapi.delegateService.interfaces.DelegateService;
 import com.example.springrestapi.messages.QueueMessage;
+import com.example.springrestapi.services.interfaces.ConsumerService;
+import com.example.springrestapi.services.interfaces.DelegateService;
 
-@Component
-public class Consumer {
+@Service
+public class ConsumerServiceImpl implements ConsumerService {
 
     @Autowired
     @Qualifier("userDelegateService")
     private DelegateService userDelegateService;
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
+    @Override
     public void listen(QueueMessage message) {
 
         try {
@@ -33,4 +35,5 @@ public class Consumer {
         }
 
     }
+
 }

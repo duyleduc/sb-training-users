@@ -8,14 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.springrestapi.configurations.RabbitMQConfig;
 import com.example.springrestapi.entities.User;
-import com.example.springrestapi.messages.MessageBuilder;
-import com.example.springrestapi.messages.QueueMessage;
 import com.example.springrestapi.models.UserDto;
-import com.example.springrestapi.publishers.Publisher;
 import com.example.springrestapi.repositories.UserRepository;
+import com.example.springrestapi.services.interfaces.PublisherService;
 import com.example.springrestapi.services.interfaces.UserService;
 
 @Service
@@ -25,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private Publisher publisher;
+    private PublisherService publisherService;
 
     @Override
     @Transactional
@@ -80,15 +76,12 @@ public class UserServiceImpl implements UserService {
         System.out.println("Checking user id of order.....");
         if (user.isEmpty()) {
             String routingKey = "error.order.userIdOfOrderNotFound";
-            QueueMessage message = MessageBuilder.buildMessage(accountId, RabbitMQConfig.QUEUE_NAME, routingKey,
-                    RabbitMQConfig.TOPIC_EXCHANGE, messageId);
-            publisher.sendMessage(message, routingKey);
+
+            publisherService.sendMessage(accountId, routingKey, messageId);
         }
 
         String routingKey = "checkUserIdOfOrder.order.success";
-        QueueMessage message = MessageBuilder.buildMessage(accountId, RabbitMQConfig.QUEUE_NAME, routingKey,
-                RabbitMQConfig.TOPIC_EXCHANGE, messageId);
-        publisher.sendMessage(message, routingKey);
+        publisherService.sendMessage(accountId, routingKey, messageId);
 
     }
 
