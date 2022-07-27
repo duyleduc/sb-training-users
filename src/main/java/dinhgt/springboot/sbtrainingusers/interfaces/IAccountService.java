@@ -10,5 +10,8 @@ public interface IAccountService {
 	 
 	 AccountDTO update(AccountDTO account, int id);
 	 
+	 AccountDTO updateStatusAccount(AccountDTO account, int id);
+	 
+	 AccountDTO getByID(int id);
 	
 }

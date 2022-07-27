@@ -11,11 +11,11 @@
 //@Service
 //public class ConfigListenerMQ {
 //	
-//	public final static String QUEUE_NAME = "response_account_queue";
+//	public final static String QUEUE_NAME = "request_update_account";
 //
 //	public final static String EXCHANGE_NAME = "account";
 //
-//	public final static String ROUTING_KEY = "rabbitmq.*";
+//	public final static String ROUTING_KEY = "rabbitmq.update.account";
 //	
 //	
 //	@Bean
@@ -30,7 +30,7 @@
 //
 //	@Bean
 //	MessageListenerAdapter listenerAdapter(MessageListener receiver) {
-//		return new MessageListenerAdapter(receiver, "receiveMessage");
+//		return new MessageListenerAdapter(receiver, "updateAccount");
 //	}
 //	
 //
